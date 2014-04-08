@@ -54,9 +54,9 @@ def printPosts(ps,subreddit = "all"):
 
 def execute(command):
 	global posts
-
+	command = command.lower()
 	##############VISIT /R/#############
-	if command.lower().startswith("/r/"):
+	if command.startswith("/r/"):
 		params = command.split()
 		if len(params) is 1:
 			posts = getSubreddit(params[0])
@@ -93,9 +93,9 @@ def execute(command):
 
 			return False
 	###############EXIT##################
-	elif command.lower() == "exit" or command.lower() == "quit":
+	elif command == "exit" or command == "quit":
 		sys.exit(0)
-	elif command.lower() == "help":
+	elif command == "help":
 		print("/r/subredditName\t\tto view the subreddit called subredditName")
 		print("open<number>\t\t\tto open in a browser the link at <number>th position, first post is position 1")
 		print("exit\t\t\t\tto exit this program")
@@ -105,8 +105,8 @@ def execute(command):
 		print("hot / new\t\t\tto display the hot or new section of the subreddit, default is hot")
 		print("Example: /r/all new 25\t\tShows 25 posts from the /new page of /r/all")
 	###############OPEN##################
-	elif command.lower().startswith("open"):
-		which = command.lower().split()[1]
+	elif command.startswith("open"):
+		which = command.split()[1]
 		if which.isdigit():
 			if len(posts)>int(which)-1 and int(which)>0:
 				webbrowser.open("http://www.reddit.com" + posts[int(which)-1]["permalink"],2)
