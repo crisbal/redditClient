@@ -45,7 +45,8 @@ def printPosts(ps,subreddit = "all"):
 	print(subreddit)
 	if ps:
 		for post in ps:
-			print (str(post["score"]) + "\t- " +(post["title"] if len(post["title"])<warpIfLenIsMoreThan else post["title"][:warpIfLenIsMoreThan]+"..."))
+			if "score" in post:
+				print (str(post["score"]) + "\t- " +(post["title"] if len(post["title"])<warpIfLenIsMoreThan else post["title"][:warpIfLenIsMoreThan]+"..."))
 	else:
 		print ("Impossible to fetch the requested subreddit!\nCheck if it exists or if you are requesting too much in a small time or if reddit is down")
 
@@ -126,7 +127,7 @@ while True:
 	if cmd and len(cmd)>0:
 		if not execute(cmd):
 			print (cmd + " is not a valid command! Write 'help' to see a list of avaible commands")
-	cmd = raw_input("\n: ")
+	cmd = raw_input("\n>> ")
 	
 
 
