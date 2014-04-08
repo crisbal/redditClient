@@ -12,7 +12,7 @@ import os
 import webbrowser
 
 
-warpIfLenIsMoreThan = 65
+warpIfLenIsMoreThan = 55
 
 
 def getSubreddit(subreddit = "/r/all",limit = 15,sort = "hot"):
@@ -24,28 +24,28 @@ def getSubreddit(subreddit = "/r/all",limit = 15,sort = "hot"):
 		try: 
 			page = json.loads(r.content)
 			if "data" in page:
-				ps = [dict() for x in range(limit)]
-				for i,c in enumerate(page["data"]["children"]):
+				sourcePosts = [dict() for x in range(limit)]	#holy shit this is really bad, i need to use classes
+				for i,singlePost in enumerate(page["data"]["children"]):
 					if i>=limit:
 						break
-					ps[i]["title"] = c["data"]["title"]
-					ps[i]["score"] = c["data"]["score"]
-					ps[i]["subreddit"] = c["data"]["subreddit"]
-					ps[i]["url"] = c["data"]["url"]
-					ps[i]["permalink"] = c["data"]["permalink"]
-				return ps
+					sourcePosts[i]["title"] = singlePost["data"]["title"]
+					sourcePosts[i]["score"] = singlePost["data"]["score"]
+					sourcePosts[i]["subreddit"] = singlePost["data"]["subreddit"]
+					sourcePosts[i]["url"] = singlePost["data"]["url"]
+					sourcePosts[i]["permalink"] = singlePost["data"]["permalink"]
+				return sourcePosts
 			else:
 				return False
 		except ValueError:
 			return False
 	return False
 
-def printPosts(ps,subreddit = "all"):
+def printPosts(sourcePosts,subreddit = "all"):
 	print("\n\n")
 	print(subreddit)
-	if ps:
+	if sourcePosts:
 		i = 0 
-		for post in ps:
+		for post in sourcePosts:
 			if "score" in post:
 				print (str(i+1) + ")\t" + str(post["score"]) + "\t- " +(post["title"] if len(post["title"])<warpIfLenIsMoreThan else post["title"][:warpIfLenIsMoreThan]+"..."))
 				i+=1
@@ -95,6 +95,7 @@ def execute(command):
 	###############EXIT##################
 	elif command == "exit" or command == "quit":
 		sys.exit(0)
+	###############HELP#################
 	elif command == "help":
 		print("/r/subredditName\t\tto view the subreddit called subredditName")
 		print("open<number>\t\t\tto open in a browser the link at <number>th position, first post is position 1")
