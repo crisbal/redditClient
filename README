@@ -6,6 +6,12 @@ To display help write "help" as a command.
 
 This was done just for fun, don't expect anything special.
 
-To run it you can either clone the repo or downlaod the redditClient.py file using python.
+I know I could have used the PRAW modules but I did it the hard way because I wanted to have some fun with JSON & Co.
+The parameters for a command are done the wrong way, there is probably some kind of libraby that does it for me in a better way. 
+I was also looking to include a login functionality, but it is currently on hold.
+
+
+To run it you can either clone the repo or downlaod the redditClient.py file and then running it using python.
+It works like a console, you write and th program does what you said.
 
 This file is released under MIT license

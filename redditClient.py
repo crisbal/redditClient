@@ -47,7 +47,7 @@ def printPosts(ps,subreddit = "all"):
 		for post in ps:
 			print (str(post["score"]) + "\t- " +(post["title"] if len(post["title"])<warpIfLenIsMoreThan else post["title"][:warpIfLenIsMoreThan]+"..."))
 	else:
-		print ("Impossible to fetch the requested subreddit!\nCheck if it exists or if you are requesting too much in a small time.")
+		print ("Impossible to fetch the requested subreddit!\nCheck if it exists or if you are requesting too much in a small time or if reddit is down")
 
 def execute(command):
 	global posts
