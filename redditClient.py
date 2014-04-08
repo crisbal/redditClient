@@ -44,9 +44,11 @@ def printPosts(ps,subreddit = "all"):
 	print("\n\n")
 	print(subreddit)
 	if ps:
+		i = 0 
 		for post in ps:
 			if "score" in post:
-				print (str(post["score"]) + "\t- " +(post["title"] if len(post["title"])<warpIfLenIsMoreThan else post["title"][:warpIfLenIsMoreThan]+"..."))
+				print (str(i+1) + ")\t" + str(post["score"]) + "\t- " +(post["title"] if len(post["title"])<warpIfLenIsMoreThan else post["title"][:warpIfLenIsMoreThan]+"..."))
+				i+=1
 	else:
 		print ("Impossible to fetch the requested subreddit!\nCheck if it exists or if you are requesting too much in a small time or if reddit is down")
 
