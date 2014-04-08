@@ -1,1 +1,11 @@
 This is a reddit client written in python
+
+Right now you can view any subreddit, order post by hot or new, show a limited number of posts, open a link, display some help, exit the program.
+
+To display help write "help" as a command.
+
+This was done just for fun, don't expect anything special.
+
+To run it you can either clone the repo or downlaod the redditClient.py file using python.
+
+This file is released under MIT license
