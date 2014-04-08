@@ -54,7 +54,9 @@ def printPosts(sourcePosts,subreddit = "all"):
 
 def execute(command):
     global posts
-    command = command.lower()
+    
+
+    command = command.lower().strip()
     ##############VISIT /R/#############
     if command.startswith("/r/"):
         params = command.split()
@@ -90,7 +92,6 @@ def execute(command):
                 else:
                     return False
         else:
-
             return False
     ###############EXIT##################
     elif command == "exit" or command == "quit":
@@ -105,24 +106,34 @@ def execute(command):
         print("<number of posts to show>\tto show only a limited number of posts, default is 15")
         print("hot / new\t\t\tto display the hot or new section of the subreddit, default is hot")
         print("Example: /r/all new 25\t\tShows 25 posts from the /new page of /r/all")
-    ###############OPEN##################
+    ###############OPEN##################   #I could use a regex
     elif command.startswith("open"):
-        which = command.split()[1]
-        if which.isdigit():
-            if len(posts)>int(which)-1 and int(which)>0:
-                webbrowser.open("http://www.reddit.com" + posts[int(which)-1]["permalink"],2)
-            else:
-                print ("The post is out of index")
-        else:
-            print (which + " is not a valid number!")
+        openArguments = command.split()
+        if openArguments[0] == "open" and len(openArguments) == 2:
+            if not posts:
+                print("Posts are not loaded!")
+                return True
 
+            which = openArguments[1]
+            if which.isdigit():
+                if len(posts)>int(which)-1 and int(which)>0:
+                    webbrowser.open("http://www.reddit.com" + posts[int(which)-1]["permalink"],2)
+                else:
+                    print ("The post is out of index")
+            else:
+                print (which + " is not a valid number!")
+        elif command == "open":
+            print ("Invalid number of arguments for the command open")
+        else:
+            return False
     else:
         return False
+
     return True
 ################################################################################
 
-print("Getting /r/all")
-execute("/r/all")
+print("Getting /r/python")
+execute("/r/python")
 
 cmd = None
 
