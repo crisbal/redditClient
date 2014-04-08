@@ -90,7 +90,7 @@ def execute(command):
 
 			return False
 	###############EXIT##################
-	elif command.lower() == "exit":
+	elif command.lower() == "exit" or command.lower() == "quit":
 		sys.exit(0)
 	elif command.lower() == "help":
 		print("/r/subredditName\t\tto view the subreddit called subredditName")
